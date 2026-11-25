@@ -1,6 +1,6 @@
 # ICEIB2027-IEEE：Moto Touring Copilot 會議論文（Overleaf 用）
 
-IEEEtran `[conference]` 格式的英文稿，**用 pdfLaTeX 編譯**（Overleaf 預設）。中文版的課程 Proposal 仍在 `moto-touring-copilot/docs/proposal/`。
+IEEEtran `[conference]` 格式的英文稿，**用 pdfLaTeX 編譯**（Overleaf 預設）。中文版的課程 Proposal 原稿在 `dic3-參考資料/proposal/`（從 `moto-touring-copilot/docs/proposal/source/` 複製）。
 
 ## 上傳到 Overleaf
 
@@ -44,4 +44,4 @@ IEEEtran `[conference]` 格式的英文稿，**用 pdfLaTeX 編譯**（Overleaf 
 | `dic3-參考資料/delivery/01-a-to-f-revision.md` | A–F 修正稿，文末列出查證後不採用的說法 |
 | `dic3-參考資料/delivery/02-summary-300.md` | 300 字中文摘要 |
 
-其餘章節的中文原稿（Introduction、Related Work、Proposed Scheme 與評估計畫）在 `moto-touring-copilot/docs/proposal/source/`，各 `.tex` 檔開頭的註解有寫對應的檔案。
+其餘章節的中文原稿（Introduction、Related Work、Proposed Scheme 與評估計畫）從 `moto-touring-copilot/docs/proposal/source/` 複製到 `dic3-參考資料/proposal/`，各 `.tex` 檔開頭的註解有寫對應的檔案。
