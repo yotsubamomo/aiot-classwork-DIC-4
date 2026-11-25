@@ -1,0 +1,29 @@
+% Source: moto-touring-copilot/docs/proposal/source/04-proposed-scheme.md, section 4.11.
+% No experiment has been run yet: describe the design and expected outcomes only.
+% Replace with real results only after the experiments are done.
+\section{Experimental Design}
+\label{sec:exp}
+
+Table~\ref{tab:experiments} lists the planned experiments. No results are reported yet.
+
+\begin{table*}[!t]
+\centering
+\caption{Planned Experiments}
+\label{tab:experiments}
+\footnotesize
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{2.3cm} >{\raggedright\arraybackslash}p{3.4cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{4.2cm}@{}}
+\toprule
+Experiment & Question & Method & Metrics \\
+\midrule
+E1 Pace model & Is the personal pace model more accurate than navigation estimates? & Mean speed, speed-limit conversion, and Google two-wheeler estimates vs.\ multiple linear regression vs.\ LightGBM; trip-grouped cross-validation plus a temporal hold-out on the latest trips & Segment and trip MAE and MAPE; trip-level P90 coverage \\
+E2 Verifier and ablation & Does external verification raise plan feasibility? & 20--30 planning questions with an oracle precomputed by an independent script (civil dusk, fuel-station hours, known traffic-control events, actual trip times); LLM-only vs.\ LLM with knowledge base vs.\ full agent, then removing the pace model, weather data, or road data one at a time & Oracle violation rate, return-time error, numeric agreement; refusal and infeasibility rates \\
+E3 Risk rules & Do the risk rules flag historical closure days? & Backtest on historical closure records; sensitivity analysis & Hit rate and false-alarm rate (no crash prediction claimed) \\
+E4 Case studies & Is the system useful to a rider? & Two to three complete scenarios backtested on past trips & Qualitative analysis and backtest error \\
+\bottomrule
+\end{tabularx}
+\end{table*}
+
+E2 is not scored with the verifier's own rules: the full agent only outputs plans that pass them, so scoring with the same rules would be circular, and the LLM-only baseline would fail the traceability rule by construction. Scoring all three groups against an independent oracle puts them on the same footing, and reporting refusal rates prevents the full agent from lowering its violation rate by refusing.
+
+\textbf{Expected outcomes (hypotheses).} \todo{Translate the expected outcomes in source 4.11.}

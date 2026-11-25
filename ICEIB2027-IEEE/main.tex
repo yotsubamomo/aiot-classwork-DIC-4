@@ -1,0 +1,57 @@
+% Moto Touring Copilot — ICEIB 2027 conference paper (IEEE format)
+% Compiler: pdfLaTeX (Overleaf default). BibTeX with IEEEtran.bst.
+
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{makecell}
+\usepackage{pifont}          % \ding{172}--\ding{179}: circled 1--8 for modules
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{cite}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+
+\graphicspath{{figures/}}
+
+% Unfinished text is marked with \todo{}; search for TODO before submission.
+\newcommand{\todo}[1]{\textbf{[TODO: #1]}}
+% Figure that shows a framed placeholder until the file exists
+\newcommand{\figureorplaceholder}[3]{%
+  \IfFileExists{figures/#1}%
+    {\includegraphics[#2]{#1}}%
+    {\fbox{\parbox[c][#3][c]{0.9\linewidth}{\centering\texttt{figures/#1} (add later)}}}}
+
+\begin{document}
+
+\title{Moto Touring Copilot: A Verification-Driven Multi-Agent Planner With Personalized Quantile Pace Modeling for Heavy-Motorcycle Touring}
+
+% TODO: replace with the real author list before submission.
+\author{%
+\IEEEauthorblockN{\todo{Author names}}
+\IEEEauthorblockA{\textit{\todo{Department}} \\
+\textit{\todo{University}}\\
+\todo{City, Country} \\
+\todo{email}}
+}
+
+\maketitle
+
+\input{sections/00_abstract}
+\input{sections/01_introduction}
+\input{sections/02_related_work}
+\input{sections/03_proposed_scheme}
+\input{sections/04_experiments}
+\input{sections/05_conclusion}
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

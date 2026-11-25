@@ -1,0 +1,55 @@
+% Source: moto-touring-copilot/docs/proposal/source/01-introduction.md (Chinese, A–F),
+% translated to English. Every figure is unchanged from the verified source.
+% The A–F logic is kept as paragraphs; the comments mark each part.
+\section{Introduction}
+\label{sec:intro}
+
+% A. Attention Getter
+According to preliminary figures from Taiwan's road-safety statistics portal, road traffic crashes in Taiwan caused 2,858 deaths within 30 days in 2025, only 92 fewer than in 2024, a decrease of 3.1\%~\cite{roadsafety2026}. To halve road deaths by 2030, the government set a target of a 7\% reduction per year; the 2025 result reached only about 40\% of that target~\cite{hu2026udn}. Motorcyclists accounted for 1,740 of these deaths (60.9\%), and the share was above 60\% in 2023 and 2024 as well~\cite{roadsafety2026}. In its review, the Ministry of Transportation and Communications noted that motorcyclist and elderly deaths were high and that single-vehicle crashes were a serious share of crash types~\cite{udn2026drop,tvbs2026}.
+
+Heavy-motorcycle touring is also growing. Registered large heavy motorcycles reached 279,703 at the end of 2025, an increase of 56.4\% over five years and about 3.1 times the number ten years earlier~\cite{thb2026}. New registrations, however, fell from 27,200 in 2023 to 15,506 in 2025~\cite{thb2026}: the fleet is still growing, but more slowly. This work does not claim to reduce crash rates. It targets pre-ride planning instead: underestimated riding time, rushing before dark, and afternoon thunderstorms or road closures are risks that can be seen at the planning stage.
+
+% B. Background
+Heavy-motorcycle tours in Taiwan are often one-day or two-day mountain routes, such as Provincial Highway~20 (Southern Cross-Island Highway), Highway~8 (Central Cross-Island Highway), and Highway~14A. Such routes share three properties. First, weather depends on time: in Taiwan's warm season under weak synoptic forcing, afternoon thunderstorms peak at 15:00--16:00, and rainfall is most frequent along a narrow band on the lower mountain slopes~\cite{lin2011thunderstorm}, so the hours a rider spends in the mountains determine whether the rider meets rain. Second, roads may be closed preventively: on July~19 and September~22, 2025, the highway authority imposed precautionary closures on sections of the Southern Cross-Island Highway because of typhoon rain~\cite{cna2025jul,cna2025sep}. Third, supply points are sparse: mountain fuel stations are far apart and have limited opening hours.
+
+The relevant data are public. The Central Weather Administration (CWA) provides 3-hourly township forecasts, hourly observations, sunrise and sunset times, and weather warnings~\cite{cwa2026opendata}, and the Transport Data eXchange (TDX) provides provincial-highway traffic conditions updated every minute~\cite{tdx2026traffic}. Riders also often hold GPX tracks recorded by on-board apps, which contain the actual riding time of every segment. Technically, LLM agents can now understand natural language and call external tools, which makes conversational trip planning feasible.
+
+% C. Problem
+A typical user question is: ``I want to ride the Southern Cross-Island Highway and back on Saturday. When should I leave to get home before dark? Where should I refuel? Which segments may have rain or closures?'' Answering it requires three things at once:
+\begin{enumerate}
+  \item \textbf{Personalized travel-time prediction:} predict how long this rider will take on each segment, based on the rider's own history, as a range rather than a single number.
+  \item \textbf{Time-aligned risk queries:} query the township forecast, sunset time, and road conditions for the time the rider is expected to reach each segment, not only the weather at the origin.
+  \item \textbf{Cross-constraint consistency:} segment times must add up, the return must precede sunset, and the distance between fuel stops must stay within the fuel range.
+\end{enumerate}
+We define the problem as follows: given the origin and destination, the route, the date, and the rider's historical GPX tracks, produce a verifiable trip plan that contains a recommended departure time (with a range), fuel stops, and a risk explanation for each segment, with the data source of every number.
+
+% D. Existing Limitations
+\textit{Navigation estimates are not personalized.} Google Maps introduced a motorcycle mode in Taiwan in 2018, described as using machine learning to account for motorcycle speeds~\cite{google2018scooter}, and its ETA model is trained on aggregate traffic data to improve estimates for most road users~\cite{derrow2021eta}. Neither source mentions adjustment to an individual rider's records or a time range, while riding time on winding mountain segments varies widely between riders.
+
+\textit{Motorcycle apps focus on routes and logging, not on combining time and risk.} Calimoto, Kurviger, and REVER provide winding-road routing, loops, ride logging, and location sharing, and REVER's paid plan adds weather alerts~\cite{henges2025apps,rever2026pro}. Neither the review nor the official feature lists mention personalized arrival-time prediction or closure alerts.
+
+\textit{LLMs alone handle temporal and spatial computation poorly.} On the TravelPlanner benchmark, GPT-4-Turbo, collecting information with tools and then planning, reaches a final pass rate of only 0.6\% when all hard and commonsense constraints must hold~\cite{xie2024travelplanner}. On the more realistic RETAIL benchmark, the strongest existing model reaches only 1.0\%~\cite{deng2025retail}. MapEval tested 30 foundation models and none exceeded 67\% on map reasoning, with distance and route planning as the main weaknesses~\cite{dihan2025mapeval}. External verification helps markedly: LLM-Modulo checks plans with critics and raises GPT-4-Turbo's pass rate from 4.4\% to 20.6\%~\cite{gundawar2024llmmodulo}, and delegating the problem to an SMT solver reaches 93.9\%~\cite{hao2025smt}. These studies address flight-and-hotel itineraries and do not cover continuous-time constraints such as riding pace, hourly weather, and sunset.
+
+\textit{Data are scattered.} Forecasts, sunset times, road conditions, and fuel stations sit on different platforms, and riders currently query each one and convert times by themselves.
+
+% E. Innovation
+This work differs from prior systems in four ways:
+\begin{enumerate}
+  \item \textbf{Pace learned from the rider's own GPX, with a range.} The actual riding times of past trips serve as ground truth; segment times are predicted from curvature, grade, road class, and other features as P50 and P90, and compared with Google Maps two-wheeler route estimates~\cite{googleroutes2026}.
+  \item \textbf{Risk queried at the predicted arrival time.} The expected arrival window of each segment is computed first, and the forecast, sunset time, and road conditions for that window are then used, so that time-varying hazards such as afternoon thunderstorms map onto specific segments.
+  \item \textbf{Verification inside the planning loop.} Following LLM-Modulo~\cite{gundawar2024llmmodulo}, a verifier agent checks the plan with explicit rules and sends it back for replanning on failure. The LLM only interprets the request, dispatches work, and explains results; every number comes from tool computation.
+  \item \textbf{Answers with sources.} A knowledge base stores CWA warning definitions, highway-authority traffic information, and riding-safety material, and answers cite their sources.
+\end{enumerate}
+The system is a personalized pre-ride decision aid; it does not predict crashes.
+
+% F. Contributions
+The expected contributions, to be validated in the experiments, are:
+\begin{enumerate}
+  \item \textbf{A personalized pace model with prediction intervals.} A segment table is built from 279 GPX trips, and multiple linear regression and gradient-boosted trees with quantile loss predict segment and trip times as P50/P90. Baselines are mean speed, speed-limit conversion, and Google Maps two-wheeler estimates~\cite{googleroutes2026}; metrics are MAE, MAPE, and P90 interval coverage under trip-grouped cross-validation and a temporal hold-out on the latest trips.
+  \item \textbf{A multi-agent planner with verification and replanning.} Five agents (planning, pace analysis, weather, road and supply, and verification) divide the work. Verification rules check that the return precedes sunset, that segment times are consistent, that fuel distances are within range, and that every number in the answer traces to a tool output; on failure the plan is replanned up to a fixed limit.
+  \item \textbf{Integration of Taiwanese open data and a knowledge base.} CWA township forecasts, observations, sunrise/sunset times, and warnings~\cite{cwa2026opendata}, TDX provincial-highway conditions~\cite{tdx2026traffic}, terrain data, fuel-station data, and the OpenStreetMap road network are combined with a sourced domain knowledge base, giving a reusable data acquisition and preprocessing pipeline.
+  \item \textbf{An evaluation design with ablation.} Twenty to thirty planning questions compare an LLM-only planner, an LLM with a knowledge base, and the full agent (tools and verification loop) against an independent oracle (precomputed civil dusk, opening hours, traffic-control events, and actual trip times), reporting violation rate, time error, consistency, and refusal rate, together with historical backtests and two to three case studies.
+\end{enumerate}
+The data come from a single rider ($n = 1$), so conclusions are limited to the personalized setting; methodologically, any rider who imports their own GPX tracks can train their own model. Real-time in-ride updates and voice alerts are left as future work.
+
+The rest of this paper is organized as follows. Section~\ref{sec:related} reviews related work, Section~\ref{sec:scheme} describes the proposed scheme, Section~\ref{sec:exp} presents the experimental design, and Section~\ref{sec:conclusion} concludes.

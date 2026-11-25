@@ -1,0 +1,47 @@
+% Source to translate: moto-touring-copilot/docs/proposal/source/04-proposed-scheme.md
+% The architecture figure in the Chinese proposal has Chinese labels; redraw it in
+% English and save as figures/architecture.pdf (the placeholder disappears once it exists).
+\section{Proposed Scheme}
+\label{sec:scheme}
+
+\subsection{System Architecture}
+
+The system follows an eight-module architecture (Fig.~\ref{fig:arch}).
+
+\begin{figure*}[!t]
+\centering
+\figureorplaceholder{architecture.pdf}{width=0.9\textwidth}{6cm}
+\caption{Architecture of Moto Touring Copilot (modules \ding{172}--\ding{179}).}
+\label{fig:arch}
+\end{figure*}
+
+\begin{itemize}
+  \item[\ding{172}] \textbf{User and scenario:} heavy-motorcycle touring riders in Taiwan planning a trip and checking weather, road conditions, fuel, and refueling points before departure.
+  \item[\ding{173}] \textbf{Query input:} a web chat interface; the rider describes the trip by place names or picks points on a map, and imports GPX tracks to build and update the personal pace model.
+  \item[\ding{174}] \textbf{Planner and reasoning:} five agents divide the work; a failed verification triggers replanning; rider preferences and past plans are remembered.
+  \item[\ding{175}] \textbf{Data acquisition:} the rider's GPX tracks, CWA, TDX, the national digital terrain model, OpenStreetMap, fuel-station data, and the Google Maps Routes API.
+  \item[\ding{176}] \textbf{Analytics engine:} the personal pace model (P50/P90), weather and road risk rules, fuel-range and station checks, and daylight checks, all implemented as deterministic Python tools.
+  \item[\ding{177}] \textbf{Domain knowledge:} retrieval over CWA warning definitions, highway traffic information, riding-safety material, motorcycle specifications (tank size, fuel consumption), and related research, with sources cited.
+  \item[\ding{178}] \textbf{Decision and recommendation:} recommended departure time, arrival-time ranges per segment, fuel stops, and ranked risks with reasons; infeasible requests are explained with alternatives.
+  \item[\ding{179}] \textbf{Output:} a chat answer, a map dashboard with segments colored by time and risk, fuel stations, and sunset time, and a downloadable trip plan.
+\end{itemize}
+
+\subsection{Multi-Agent Design}
+\todo{Orchestrator, pace, weather, road-and-supply, and verifier agents; verification rules 1--5 (source 4.4.1).}
+
+\subsection{Personalized Pace Model}
+\todo{Segment features, log moving-time target, quantile loss, conformal correction of trip-level P90 (sources 4.5--4.6).}
+
+\subsection{Planning Algorithm}
+
+\begin{algorithm}[!t]
+\caption{\todo{Verification-driven planning}}
+\label{alg:plan}
+\begin{algorithmic}[1]
+\Require \todo{route, date, rider GPX history}
+\Ensure \todo{verified trip plan}
+\State \todo{Translate the pseudocode in source 4.8 line by line.}
+\end{algorithmic}
+\end{algorithm}
+
+\todo{Explain Algorithm~\ref{alg:plan}, including the replanning loop and exceptions (sources 4.7--4.8).}

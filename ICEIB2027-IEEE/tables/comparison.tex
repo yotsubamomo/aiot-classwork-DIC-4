@@ -1,0 +1,23 @@
+% Comparison of representative approaches. Each cell uses only what the Introduction
+% already states from the cited sources: "--" means the cited source does not describe it.
+% TODO: extend with the Related Work sources once they are verified and added.
+\begin{table*}[!t]
+\centering
+\caption{Comparison of Representative Approaches}
+\label{tab:comparison}
+\footnotesize
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{3.6cm} >{\raggedright\arraybackslash}X c c c c@{}}
+\toprule
+Approach & Planning domain & \makecell{Personalized\\time} & \makecell{Time\\range} & \makecell{Arrival-time-\\aligned risk} & \makecell{External\\verification} \\
+\midrule
+Google Maps ETA~\cite{google2018scooter,derrow2021eta} & Road navigation (incl.\ motorcycle mode) & -- & -- & -- & -- \\
+Motorcycle apps~\cite{henges2025apps,rever2026pro} & Winding-road routing, ride logging & -- & -- & partial$^{a}$ & -- \\
+LLM agent with tools~\cite{xie2024travelplanner} & Flight-and-hotel itineraries & -- & -- & -- & -- \\
+LLM-Modulo~\cite{gundawar2024llmmodulo} & Flight-and-hotel itineraries & -- & -- & -- & $\checkmark$ (critics) \\
+SMT-based planning~\cite{hao2025smt} & Flight-and-hotel itineraries & -- & -- & -- & $\checkmark$ (solver) \\
+\textbf{Moto Touring Copilot (planned)} & Heavy-motorcycle touring & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ (rules) \\
+\bottomrule
+\multicolumn{6}{@{}l}{\scriptsize $\checkmark$: supported. --: not described in the cited sources. $^{a}$REVER's paid plan provides weather alerts.}
+\end{tabularx}
+\end{table*}
