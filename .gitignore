@@ -1,3 +1,5 @@
 # Overleaf upload zip, rebuilt with: git archive --format=zip -o ICEIB2027-IEEE.zip HEAD:ICEIB2027-IEEE
 ICEIB2027-IEEE.zip
 ICEIB2027-IEEE/figures/architecture.png
+# Submission PDFs (DIC4-1 contains the author email); upload them to the course site, not GitHub
+submission/
