@@ -34,14 +34,14 @@ IEEEtran `[conference]` 格式的英文稿，**用 pdfLaTeX 編譯**（Overleaf 
 
 ## 原始資料
 
-從 `aiot-classwork-DIC-3` 複製到這個 repo 的 `docs/`：
+從 `aiot-classwork-DIC-3` 複製到這個 repo 的 `dic3-參考資料/`：
 
 | 檔案 | 用途 |
 | --- | --- |
-| `docs/_AIoT_-DA_L16_打造_AGENT_(目標系統架構PDAC)OVERLEAF.pdf` | L16 講義：ICEIB 2027 要求（英文、4–8 頁、2027-03-01 交摘要）與本專案結構 |
-| `docs/期末專題提案作業規範.pdf` | 課程作業規範（A–F、Related Work 表格、①–⑧ 架構、不得捏造結果） |
-| `docs/delivery/03-ieee-abstract-en.md` | `00_abstract.tex` 的來源 |
-| `docs/delivery/01-a-to-f-revision.md` | A–F 修正稿，文末列出查證後不採用的說法 |
-| `docs/delivery/02-summary-300.md` | 300 字中文摘要 |
+| `dic3-參考資料/_AIoT_-DA_L16_打造_AGENT_(目標系統架構PDAC)OVERLEAF.pdf` | L16 講義：ICEIB 2027 要求（英文、4–8 頁、2027-03-01 交摘要）與本專案結構 |
+| `dic3-參考資料/期末專題提案作業規範.pdf` | 課程作業規範（A–F、Related Work 表格、①–⑧ 架構、不得捏造結果） |
+| `dic3-參考資料/delivery/03-ieee-abstract-en.md` | `00_abstract.tex` 的來源 |
+| `dic3-參考資料/delivery/01-a-to-f-revision.md` | A–F 修正稿，文末列出查證後不採用的說法 |
+| `dic3-參考資料/delivery/02-summary-300.md` | 300 字中文摘要 |
 
 其餘章節的中文原稿（Introduction、Related Work、Proposed Scheme 與評估計畫）在 `moto-touring-copilot/docs/proposal/source/`，各 `.tex` 檔開頭的註解有寫對應的檔案。
