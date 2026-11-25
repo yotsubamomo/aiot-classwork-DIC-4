@@ -1,2 +1,3 @@
 # Overleaf upload zip, rebuilt with: git archive --format=zip -o ICEIB2027-IEEE.zip HEAD:ICEIB2027-IEEE
 ICEIB2027-IEEE.zip
+ICEIB2027-IEEE/figures/architecture.png

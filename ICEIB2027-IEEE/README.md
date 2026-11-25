@@ -21,7 +21,7 @@ IEEEtran `[conference]` 格式的英文稿，**用 pdfLaTeX 編譯**（Overleaf 
 | `sections/05_conclusion.tex` | 結論 | 骨架 |
 | `tables/comparison.tex` | 既有方法與本系統的比較 | 只用緒論已查證的內容填寫 |
 | `references.bib` | 參考文獻 [I1]–[I21] | Related Work 的 [1]–[19] 尚未加入 |
-| `figures/architecture.pdf` | 英文架構圖 | **待補**；檔案放進來之前，PDF 上會顯示外框佔位 |
+| `figures/architecture.pdf` | 英文架構圖（Fig. 1） | 完成，由 `figures/make_architecture.py` 產生；要改圖就改這個檔，再執行 `python figures/make_architecture.py` |
 
 還沒完成的地方都用 `\todo{}` 標示，PDF 上會顯示粗體的 **[TODO: …]**。投稿前在 Overleaf 搜尋 `TODO`，確認全部清掉。
 
